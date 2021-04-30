@@ -9,7 +9,7 @@ const recursiveIsEqual = (value1: unknown, value2: unknown, compareCase: boolean
 	}
 
 	/* Check and compare primitive types */
-	if ([typeof value1, typeof value2].some((type) => ['number', 'string'].includes(type))) {
+	if ([typeof value1, typeof value2].some((type) => ['number', 'string', 'boolean'].includes(type))) {
 		if (!compareCase)
 			return compareType
 				? ((value1 as string).toLowerCase?.() ?? value1) === ((value2 as string).toLowerCase?.() ?? value2)
