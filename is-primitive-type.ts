@@ -1,0 +1,1 @@
+export const isPrimitiveType = ( value: unknown ): boolean => [ 'number', 'string', 'boolean' ].includes( typeof value );

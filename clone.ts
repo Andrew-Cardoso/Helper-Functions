@@ -1,12 +1,12 @@
-const recursiveClone = <T>(value: T): T => {
-	if (!value || ['number', 'string', 'boolean'].includes(typeof value)) return value;
+import { isPrimitiveType } from "./is-primitive-type";
 
-	if (Array.isArray(value)) return <T><unknown>value.map(x => recursiveClone(x));
+export const clone = <T> ( value: T ): T => {
+	if ( !value || isPrimitiveType( value ) ) return value;
+
+	if ( Array.isArray( value ) ) return <T> <unknown> value.map( clone );
 
 	const clonedObject: Partial<T> = {};
-	for (const key in value) clonedObject[key] = recursiveClone<T[Extract<keyof T, string>]>(value[key]);
+	for ( const key in value ) clonedObject[ key ] = clone<T[ Extract<keyof T, string> ]>( value[ key ] );
 
-	return clonedObject as T;
+	return <T> clonedObject;
 };
-
-export const clone = <T>(object: T): T => recursiveClone<T>(object);
