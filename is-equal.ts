@@ -1,3 +1,4 @@
+import { anyIsDate } from "./is-date";
 import { isPrimitiveType } from "./is-primitive-type";
 
 type PrimitiveType = string | number | boolean;
@@ -40,7 +41,9 @@ export const isEqual = ( value1: any, value2: any, compareCase = true, compareTy
 	/* Check and compare primitive types */
 	if ( [ value1, value2 ].some( isPrimitiveType ) )
 		return compareValues( value1, value2, compareCase, compareType );
-
+	
+	if ( anyIsDate(value1, value2) )
+		return ( <Date> value1 ).getTime?.() === ( <Date> value2 ).getTime?.();
 
 	const isValue1Array = Array.isArray( value1 );
 	const isValue2Array = Array.isArray( value2 );
