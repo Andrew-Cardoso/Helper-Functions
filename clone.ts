@@ -4,7 +4,7 @@ export const clone = <T> ( value: T ): T => {
 	if ( !value || isPrimitiveType( value ) ) return value;
 	
 	if ( Object.prototype.toString.call( value ) === '[object Date]' )
-		return new Date( value as unknown as Date ) as unknown as T;
+		return <T> <unknown> new Date( <Date> <unknown> value );
 
 	if ( Array.isArray( value ) ) return <T> <unknown> value.map( clone );
 
