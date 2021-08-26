@@ -1,9 +1,11 @@
-import { isPrimitiveType } from "./is-primitive-type";
+import { isDate } from './is-date';
+import { isPrimitiveType } from './is-primitive-type';
 
 export const clone = <T> ( value: T ): T => {
-	if ( !value || isPrimitiveType( value ) ) return value;
 	
-	if ( Object.prototype.toString.call( value ) === '[object Date]' )
+	if ( !value || isPrimitiveType( value ) ) return value;
+
+	if ( isDate(value) )
 		return <T> <unknown> new Date( <Date> <unknown> value );
 
 	if ( Array.isArray( value ) ) return <T> <unknown> value.map( clone );
